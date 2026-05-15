@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import AppLayout from '../../components/layout/AppLayout';
 import './Dashboard.css';
 
@@ -12,6 +12,8 @@ const GridPlusIcon = () => (
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isProductsPage = location.pathname === '/products';
 
   return (
     <AppLayout>
@@ -19,8 +21,15 @@ const Dashboard = () => {
 
         <div className="dashboard-topbar">
           <div className="topbar-tabs">
-            <button className="dash-tab active">Catalogue</button>
-            <button className="dash-tab">Storefront</button>
+            <button 
+              className={`dash-tab ${!isProductsPage ? 'active' : ''}`}
+              onClick={() => navigate('/dashboard')}
+            >
+              {isProductsPage ? 'Products' : 'Catalogue'}
+            </button>
+            {!isProductsPage && (
+              <button className="dash-tab">Storefront</button>
+            )}
           </div>
           <div className="topbar-right-area">
             <div className="topbar-avatar">👤</div>

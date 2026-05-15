@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../../services/authService";
 import toast from "react-hot-toast";
+import logo from '../../assets/logo.svg';
+import illustration from '../../assets/auth-illustration.png';
 import "./Auth.css";
 
 const Login = () => {
@@ -21,8 +23,6 @@ const Login = () => {
     setLoading(true);
     try {
       const res = await login(emailOrPhone.trim());
-      console.log(res)
-      console.log(res.data)
       toast.success("OTP sent");
       navigate("/otp", {
         state: { emailOrPhone: emailOrPhone.trim(), otp: res.data.otp },
@@ -33,30 +33,29 @@ const Login = () => {
       setLoading(false);
     }
   };
+
   return (
     <div className="auth-page">
       {/* Left illustration panel */}
       <div className="auth-left">
-        <div className="auth-illustration">
-          <div className="auth-illustration-card">
-            <div className="runner-icon">🏃</div>
-            <p>Upl<span>o</span>ad your<br />product to market</p>
-          </div>
-        </div>
+        <img
+          src={illustration}
+          alt="Uplist your product to market"
+          // style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
       </div>
- 
+
       {/* Right form panel */}
       <div className="auth-right">
         <div className="auth-card">
           {/* Logo */}
           <div className="auth-logo">
-            <div className="logo-icon">🛍️</div>
-            <span>Productr</span>
+            <img src={logo} alt="Productr" height="28" />
           </div>
- 
+
           <h2>Login to your Productr Account</h2>
           <p>Enter your credentials to access your account</p>
- 
+
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label className="form-label">Email or Phone number</label>
@@ -70,7 +69,7 @@ const Login = () => {
               />
               {error && <p className="form-error">{error}</p>}
             </div>
- 
+
             <button
               type="submit"
               className="btn btn-primary"
@@ -80,7 +79,7 @@ const Login = () => {
               {loading ? <><span className="spinner" /> Sending OTP...</> : 'Login'}
             </button>
           </form>
- 
+
           <p className="auth-footer">
             Don't have an account?{' '}
             <Link to="/login" className="auth-link">Sign Up here</Link>
@@ -90,5 +89,5 @@ const Login = () => {
     </div>
   );
 };
- 
+
 export default Login;

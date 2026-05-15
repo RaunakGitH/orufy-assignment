@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { verifyOtp } from '../../services/authService';
+import { verifyOtp, login } from '../../services/authService';
 import { useAuth } from '../../context/authContext';
-import { login } from '../../services/authService';
 import toast from 'react-hot-toast';
+import logo from '../../assets/logo.svg';
+import illustration from '../../assets/auth-illustration.png';
 import './Auth.css';
 
 const OTP = () => {
@@ -12,7 +13,7 @@ const OTP = () => {
   const { loginSuccess } = useAuth();
 
   const emailOrPhone = location.state?.emailOrPhone || '';
-  const devOtp = location.state?.otp || ''; 
+  const devOtp = location.state?.otp || '';
 
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [loading, setLoading] = useState(false);
@@ -20,12 +21,10 @@ const OTP = () => {
   const [resendTimer, setResendTimer] = useState(30);
   const inputRefs = useRef([]);
 
-  
   useEffect(() => {
     if (!emailOrPhone) navigate('/login');
   }, [emailOrPhone, navigate]);
 
-  
   useEffect(() => {
     if (resendTimer === 0) return;
     const t = setTimeout(() => setResendTimer((s) => s - 1), 1000);
@@ -33,17 +32,15 @@ const OTP = () => {
   }, [resendTimer]);
 
   const handleChange = (index, value) => {
-    if (!/^\d*$/.test(value)) return; 
+    if (!/^\d*$/.test(value)) return;
     const newOtp = [...otp];
-    newOtp[index] = value.slice(-1); 
+    newOtp[index] = value.slice(-1);
     setOtp(newOtp);
     setError('');
-    
     if (value && index < 5) inputRefs.current[index + 1]?.focus();
   };
 
   const handleKeyDown = (index, e) => {
-    
     if (e.key === 'Backspace' && !otp[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
@@ -97,21 +94,19 @@ const OTP = () => {
     <div className="auth-page">
       {/* Left illustration panel */}
       <div className="auth-left">
-        <div className="auth-illustration">
-          <div className="auth-illustration-card">
-            <div className="runner-icon">🏃</div>
-            <p>Upl<span>o</span>ad your<br />product to market</p>
-          </div>
-        </div>
+        <img
+          src={illustration}
+          alt="Uplist your product to market"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
       </div>
 
-      
+      {/* Right form panel */}
       <div className="auth-right">
         <div className="auth-card">
           {/* Logo */}
           <div className="auth-logo">
-            <div className="logo-icon">🛍️</div>
-            <span>Productr</span>
+            <img src={logo} alt="Productr" height="28" />
           </div>
 
           <h2>Login to your Productr Account</h2>
