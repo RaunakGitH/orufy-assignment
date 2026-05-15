@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
-const connectDb = require("./db");
+const connectDb = require("./config/db");
 
 dotenv.config();
 
@@ -24,7 +24,7 @@ app.use(morgan("dev"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/products", require("./routes/products"));
 
-app.use("/", () => {
+app.use("/", (req,res) => {
   res.json({
     message: "Api is running",
   });
@@ -48,5 +48,5 @@ app.use((err,req,res,next)=>{
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log("Server started at port: ${PORT}");
+  console.log(`Server started at port: ${PORT}`);
 });
