@@ -24,7 +24,7 @@ router.post('/login', async (req,res)=>{
       },{
         otp,otpExpiry
       },{
-        upsert:true,new:true
+        upsert:true,returnDocument:"after"
       }
     )
     console.log(`OTP : ${otp}`)
@@ -59,7 +59,7 @@ router.post('/verify-otp',async (req,res)=>{
       })
     }
     if(user.otp !== otp){
-      res.status(400).json({
+      return res.status(400).json({
         success:false,
         message:"Invalid OTP"
       })
