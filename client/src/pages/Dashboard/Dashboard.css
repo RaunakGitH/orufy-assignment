@@ -7,9 +7,8 @@
 .dashboard-topbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 28px;
-  height: 56px;
+  justify-content: flex-end;
+  padding: 16px 28px;
   background: #fff;
   border-bottom: 1px solid var(--border);
   position: sticky;
@@ -34,7 +33,9 @@
   color: var(--text-secondary);
   cursor: pointer;
   border-bottom: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
 }
 
 .dash-tab.active {
@@ -42,7 +43,9 @@
   border-bottom-color: var(--primary);
 }
 
-.dash-tab:hover:not(.active) { color: var(--text-primary); }
+.dash-tab:hover:not(.active) {
+  color: var(--text-primary);
+}
 
 .topbar-right-area {
   display: flex;
@@ -51,20 +54,21 @@
 }
 
 .topbar-avatar {
-  width: 34px; height: 34px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: var(--primary-light);
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 16px;
   cursor: pointer;
 }
-
 
 .dashboard-body {
   flex: 1;
   padding: 24px 28px;
 }
-
 
 .product-tabs {
   display: flex;
@@ -83,7 +87,9 @@
   font-weight: 500;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: color 0.15s, border-color 0.15s;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
 }
 
 .product-tab.active {
@@ -91,7 +97,9 @@
   border-bottom-color: var(--primary);
 }
 
-.product-tab:hover:not(.active) { color: var(--text-primary); }
+.product-tab:hover:not(.active) {
+  color: var(--text-primary);
+}
 
 .dashboard-empty {
   display: flex;
@@ -121,8 +129,11 @@
   line-height: 1.6;
 }
 
-
 @media (max-width: 768px) {
-  .dashboard-topbar { padding: 0 16px; }
-  .dashboard-body { padding: 16px; }
+  .dashboard-topbar {
+    padding: 0 16px;
+  }
+  .dashboard-body {
+    padding: 16px;
+  }
 }
