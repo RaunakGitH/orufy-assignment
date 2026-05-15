@@ -23,9 +23,6 @@ const GridPlusIcon = () => (
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const isProductsPage = location.pathname === "/products";
-
   return (
     <AppLayout>
       <div className="dashboard-page">
